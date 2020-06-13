@@ -9,5 +9,5 @@ func _ready():
 	$Hitbox.target_group = target_group
 
 func _process(delta):
-	look_at(velocity)
+	look_at(global_position + velocity.normalized())
 	global_translate(velocity * delta)
