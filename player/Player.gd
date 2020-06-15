@@ -56,7 +56,7 @@ func process_movement(delta):
 	movement_velocity = move_and_slide(linear_velocity)
 
 func process_spinning(delta):
-	self.rotate(TAU * torque * delta * spin_direction)
+	rotate(TAU * torque * delta * spin_direction)
 
 func process_groups(delta):
 	if SPRITES["player"].has(team):
@@ -64,9 +64,11 @@ func process_groups(delta):
 
 func fire():
 	for child in $Muzzles.get_children():
+		var angle_to_muzzle = child.global_position.angle_to_point(global_position) 
+		
 		var instance = Bullet.instance()
 		instance.global_position = child.global_position
-		instance.velocity = Vector2(cos(rotation) * shot_speed, sin(rotation) * shot_speed)
+		instance.velocity = Vector2(cos(angle_to_muzzle) * shot_speed, sin(angle_to_muzzle) * shot_speed)
 		instance.team = team # Set the bullet to be the team the player is on
 		instance.target_group = "enemy" # Make sure this bullet only collides with enemy ships
 		
