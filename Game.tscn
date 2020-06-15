@@ -6,3 +6,12 @@
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 515.65, 275.013 )
+
+[node name="Label" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "WASD/Arrows: Move
+Space Bar: Flip"
+__meta__ = {
+"_edit_use_anchors_": false
+}
