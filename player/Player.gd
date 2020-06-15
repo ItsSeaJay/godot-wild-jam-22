@@ -1,5 +1,5 @@
 class_name Player
-extends KinematicBody2D
+extends Node2D
 
 const Bullet = preload("res://combat/bullet/Bullet.tscn")
 const SPRITES = {
@@ -25,7 +25,7 @@ var heat = 0
 var movement_velocity : Vector2 = Vector2.ZERO
 var team = Global.TEAMS[0]
 
-func _physics_process(delta):
+func _process(delta):
 	process_firing(delta)
 	process_movement(delta)
 	process_spinning(delta)
@@ -53,7 +53,8 @@ func process_movement(delta):
 	else:
 		linear_velocity = linear_velocity.move_toward(Vector2.ZERO, movement_friction)
 	
-	movement_velocity = move_and_slide(linear_velocity)
+	movement_velocity = linear_velocity
+	translate(linear_velocity * delta)
 
 func process_spinning(delta):
 	rotate(TAU * torque * delta * spin_direction)

@@ -16,5 +16,7 @@ func _on_area_entered(area):
 		
 		if entity != null:
 			if entity.is_in_group(target_group):
-				entity.hit()
+				if entity.has_method("hit"):
+					entity.hit()
+				
 				emit_signal("target_group_hit")

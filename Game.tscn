@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://combat/enemy/homing/HomingEnemy.tscn" type="PackedScene" id=2]
 
 [node name="Game" type="Node2D"]
 
@@ -15,3 +16,5 @@ Space Bar: Flip"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HomingEnemy" parent="." instance=ExtResource( 2 )]
