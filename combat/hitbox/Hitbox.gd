@@ -14,6 +14,7 @@ func _on_area_entered(area):
 	if area is Hurtbox:
 		var entity = area.get_node(area.path_to_owner)
 		
-		if entity.is_in_group(target_group):
-			entity.hit()
-			emit_signal("target_group_hit")
+		if entity != null:
+			if entity.is_in_group(target_group):
+				entity.hit()
+				emit_signal("target_group_hit")

@@ -63,16 +63,18 @@ func process_groups(delta):
 		$Sprite.texture = SPRITES["player"][team]
 
 func fire():
-	var instance = Bullet.instance()
-	instance.global_position = $Muzzle.global_position
-	instance.velocity = Vector2(cos(rotation) * shot_speed, sin(rotation) * shot_speed)
-	instance.team = team
-	instance.target_group = "enemy" # Make sure this bullet only collides with enemy ships
-	
-	if SPRITES["bullet"].has(team):
-		instance.get_node("Sprite").texture = SPRITES["bullet"][team]
-	
-	get_tree().root.add_child(instance)
+	for child in $Muzzles.get_children():
+		var instance = Bullet.instance()
+		instance.global_position = child.global_position
+		instance.velocity = Vector2(cos(rotation) * shot_speed, sin(rotation) * shot_speed)
+		instance.team = team # Set the bullet to be the team the player is on
+		instance.target_group = "enemy" # Make sure this bullet only collides with enemy ships
+		
+		# Ensure the projectile looks correct
+		if SPRITES["bullet"].has(team):
+			instance.get_node("Sprite").texture = SPRITES["bullet"][team]
+		
+		get_tree().root.add_child(instance)
 	
 	# Prevent the player from firing until the heat has surpised the cooldown time
 	heat = cooldown_time
