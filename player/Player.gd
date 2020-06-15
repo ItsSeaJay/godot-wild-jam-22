@@ -3,8 +3,14 @@ extends KinematicBody2D
 
 const Bullet = preload("res://combat/bullet/Bullet.tscn")
 const SPRITES = {
-	"team_first": preload("res://player/paddleRed.png"),
-	"team_second": preload("res://player/paddleBlu.png")
+	"player": {
+		"team_first": preload("res://player/paddleRed.png"),
+		"team_second": preload("res://player/paddleBlu.png")
+	},
+	"bullet": {
+		"team_first": preload("res://combat/bullet/laserRed04.png"),
+		"team_second": preload("res://combat/bullet/laserBlue04.png")
+	}
 }
 
 export var torque = 1 # How many times each second the player should spin
@@ -53,13 +59,17 @@ func process_spinning(delta):
 	self.rotate(TAU * torque * delta * spin_direction)
 
 func process_groups(delta):
-	if SPRITES.has(team):
-		$Sprite.texture = SPRITES[team]
+	if SPRITES["player"].has(team):
+		$Sprite.texture = SPRITES["player"][team]
 
 func fire():
 	var instance = Bullet.instance()
 	instance.global_position = $Muzzle.global_position
 	instance.velocity = Vector2(cos(rotation) * shot_speed, sin(rotation) * shot_speed)
+	instance.team = team
+	
+	if SPRITES["bullet"].has("team"):
+		instance.get_node("Sprite").texture = SPRITES["bullet"][team]
 	
 	get_tree().root.add_child(instance)
 	
@@ -70,10 +80,9 @@ func flip():
 	spin_direction *= -1
 	
 	# Change to the opposite team the player is currently in
-	# Change to the opposite team the player is currently in
 	if team == "team_first":
 		team = "team_second"
-	elif team == "team_second":
+	else:
 		team = "team_first"
 
 func get_input_direction():
