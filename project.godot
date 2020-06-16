@@ -9,6 +9,16 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Reference",
+"class": "FiniteState",
+"language": "GDScript",
+"path": "res://finite_state/states/FiniteState.gd"
+}, {
+"base": "Node",
+"class": "FiniteStateMachine",
+"language": "GDScript",
+"path": "res://finite_state/machine/FiniteStateMachine.gd"
+}, {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
@@ -25,6 +35,8 @@ _global_script_classes=[ {
 "path": "res://player/Player.gd"
 } ]
 _global_script_class_icons={
+"FiniteState": "",
+"FiniteStateMachine": "",
 "Hitbox": "",
 "Hurtbox": "",
 "Player": ""
