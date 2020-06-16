@@ -2,5 +2,5 @@
 
 [ext_resource path="res://finite_state/states/FiniteState.gd" type="Script" id=1]
 
-[node name="FiniteState2D" type="Node2D"]
+[node name="FiniteState" type="Node"]
 script = ExtResource( 1 )
