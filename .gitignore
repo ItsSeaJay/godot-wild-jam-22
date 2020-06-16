@@ -9,4 +9,4 @@ export_presets.cfg
 data_*/
 
 # Ignore export folder
-export/
+export/*
